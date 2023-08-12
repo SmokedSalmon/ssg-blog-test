@@ -18,10 +18,10 @@
   Learn about **CSG/SSR/SSG** render approach
   Utilize `getStaticPaths` & `getStaticProps` to tell NextJS to **pre-render** pages dedicated by an external source  
   create the static `/member/[id]` pages by an external data source in the dummy data folder
-  run `build` and verify those desired static pages are generated in `.next` folder
+  run `build` and verify those desired static pages are generated in `.next` folder  
 
-The Project README begins here ⬇
-
+Courtesy of [看了就会的Next.js SSR/SSG实战教程](https://juejin.cn/post/7133395475675217933)  
+>The Project README begins here ⬇
 ------
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
