@@ -1,0 +1,810 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@font-face {
+  font-family: AvenirBold;
+  font-style: normal;
+  src: url("../../public/AvenirNextLTPro-BoldCn.ttf")
+}
+
+@font-face {
+  font-family: AvenirLight;
+  font-style: normal;
+  src: url("../../public/avenirnextltpro-ultltcn.ttf")
+}
+
+@font-face {
+  font-family: MaisonBook;
+  font-style: normal;
+  src: url("../../public/MaisonNeue-Bold.ttf")
+}
+
+@font-face {
+  font-family: MaisonDemiDemi;
+  font-style: normal;
+  src: url("../../public/maisonneue-demi-webfont.ttf")
+}
+
+h1 {
+  font-weight: initial
+}
+
+h2 {
+  font-weight: initial
+}
+
+p {
+  font-weight: initial
+}
+
+html {
+  box-sizing: border-box;
+  border-collapse: collapse;
+  line-height: 1;
+  font-family: sans-serif
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border-collapse: inherit
+}
+
+*,*:before,*:after {
+  box-sizing: inherit
+}
+
+body {
+  position: relative
+}
+
+[hidden] {
+  display: none !important
+}
+
+ul,ol,menu {
+  list-style: none
+}
+
+a {
+  color: inherit
+}
+
+fieldset {
+  border: none
+}
+
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  -webkit-appearance: none
+}
+
+body::-webkit-scrollbar {
+  width: 0
+}
+
+body::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+  -webkit-border-radius: 6px
+}
+
+.overflow {
+  overflow: hidden
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%
+}
+
+.scroll .wrapper {
+  margin-bottom: 200px
+}
+
+.main {
+  width: 100%;
+  height: 100%;
+}
+
+.main canvas {
+  position: absolute;
+  margin: auto;
+  display: block;
+  -webkit-transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
+  top: 50%;
+  left: 50%;
+  background-color: #000;
+  opacity: 0;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s
+}
+
+#title-container {
+  pointer-events: none;
+  position: absolute;
+  color: #000;
+  line-height: 30px;
+  top: 0;
+  margin: auto;
+  text-align: center;
+  display: block;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 128px;
+  text-transform: uppercase;
+  text-rendering: geometricPrecision;
+}
+
+#title-container h1 {
+  font-size: 40px;
+  letter-spacing: 5px;
+  font-family: AvenirBold
+}
+
+#title-container h2 {
+  font-family: AvenirLight;
+  font-size: 23px;
+  letter-spacing: 3.9px;
+  line-height: 5px;
+  margin-top: 25px;
+  margin-bottom: 3px
+}
+
+#title-container #sub-jap {
+  font-family: AvenirLight;
+  font-size: 17px;
+  letter-spacing: 1px;
+  line-height: 38px;
+  font-weight: 100
+}
+
+#title-container p {
+  font-family: AvenirLight;
+  margin-left: 3px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  line-height: 21px
+}
+
+@media only screen and (max-width: 375px) {
+  .phone #title-container {
+      top:80px;
+  }
+
+  .phone #title-container h1 {
+      font-size: 30px;
+      line-height: 10px
+  }
+
+  .phone #title-container h2 {
+      font-size: 16.8px;
+      margin-top: 20px
+  }
+
+  .phone #title-container #sub-jap {
+      font-size: 12.6px;
+      line-height: 30px
+  }
+
+  .phone #title-container p {
+      font-size: 11.16px
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .phone #title-container {
+      top:80px;
+  }
+
+  .phone #title-container h1 {
+      font-size: 25px;
+      line-height: 10px
+  }
+
+  .phone #title-container h2 {
+      font-size: 14px;
+      margin-top: 20px
+  }
+
+  .phone #title-container #sub-jap {
+      font-size: 10.5px;
+      line-height: 30px
+  }
+
+  .phone #title-container p {
+      font-size: 9.3px
+  }
+}
+
+.landscape #title-container {
+  top: 50px !important
+}
+
+#img-container {
+  display: none;
+  position: fixed;
+  width: 380px;
+  height: 110px;
+  text-align: center;
+  right: -100px;
+  bottom: 3px;
+  z-index: 50;
+  margin: auto;
+  -webkit-transform: scale(.5);
+  transform: scale(.5);
+  opacity: 0;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+}
+
+#img-container a {
+  color: #000;
+  cursor: pointer;
+  margin: 0;
+  margin-right: 20px;
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  background-size: 100%
+}
+
+.phone #img-container {
+  -webkit-transform: scale(.4);
+  transform: scale(.4);
+  text-align: initial;
+  left: calc(100% - 290px);
+  margin: initial;
+  bottom: -15px
+}
+
+.fonts-load {
+  opacity: 0;
+  width: 0;
+  height: 0
+}
+
+#linkedin {
+  /* background-image: url("../media/social/linkedin_hover.png"); */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-size: 120% 120%;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-repeat: no-repeat;
+}
+
+#linkedin:hover {
+  /* background-image: url("../media/social/linkedin.png") */
+}
+
+#codepen {
+  /* background-image: url("../media/social/codepen_hover.png"); */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-size: 120% 120%;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-repeat: no-repeat;
+}
+
+#codepen:hover {
+  /* background-image: url("../media/social/codepen.png") */
+}
+
+#twitter {
+  /* background-image: url("../media/social/twitter_hover.png"); */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-size: 120% 120%;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-repeat: no-repeat
+}
+
+#twitter:hover {
+  /* background-image: url("../media/social/twitter.png") */
+}
+
+#tumblr {
+  /* background-image: url("../media/social/tumblr_hover.png"); */
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  background-size: 120% 120%;
+  background-position: center;
+  border-radius: 50%;
+  border: 1px solid #000;
+  background-repeat: no-repeat;
+}
+
+#tumblr:hover {
+  /* background-image: url("../media/social/tumblr.png") */
+}
+
+.init {
+  font-family: Avenir;
+  color: #000;
+  position: absolute;
+  top: 25px;
+  left: 25px
+}
+
+.hue-field {
+  position: absolute
+}
+
+.available {
+  position: fixed;
+  z-index: 100;
+  top: -2px;
+  left: 25px;
+  padding: 0;
+  opacity: 0;
+}
+
+.available .available-text {
+  text-rendering: geometricPrecision;
+  font-family: AvenirLight;
+  color: #000;
+  font-size: 14px;
+  display: inline-block;
+  text-transform: initial
+}
+
+.available .available-status {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-bottom: 1px
+}
+
+.available.on .available-status {
+  background-color: #37eb15
+}
+
+.available.off .available-status {
+  background-color: #f00
+}
+
+.caroussel .caroussel-content {
+  width: 100%;
+  height: 100%;
+  display: none
+}
+
+.video-container {
+  overflow: hidden;
+  width: 100%;
+  height: 100%
+}
+
+.labbutton {
+  color: #000;
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  right: 0;
+  display: block;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  padding: 12px;
+  border: 1px solid #000;
+  width: 150px;
+  opacity: 0;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+  overflow: hidden;
+  font-family: MaisonDemiDemi;
+  font-weight: 100;
+  font-style: initial;
+  text-rendering: geometricPrecision;
+}
+
+.labbutton:after {
+  background: #000;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: .7;
+  position: absolute;
+  top: -50px;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1);
+  width: 50px;
+  z-index: 10
+}
+
+.labbutton:hover:after {
+  left: 120%;
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1)
+}
+
+.visit {
+  text-decoration: none !important;
+  color: #fff;
+  position: fixed;
+  bottom: 99px;
+  right: 55px;
+  display: block;
+  margin: auto;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 9px;
+  text-transform: uppercase;
+  padding: 8px;
+  border: 1px solid #000;
+  width: 90px;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
+  overflow: hidden;
+  font-family: MaisonDemiDemi;
+  font-weight: 100;
+  font-style: initial;
+  text-rendering: geometricPrecision;
+  opacity: 0;
+  -webkit-transition: color 1s,border-color 1s,opacity 1s;
+  transition: color 1s,border-color 1s,opacity 1s;
+  color: #000
+}
+
+.visit:after {
+  background: #fff;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: .7;
+  position: absolute;
+  top: -50px;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1);
+  width: 50px;
+  z-index: 10
+}
+
+.visit:hover:after {
+  left: 120%;
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1)
+}
+
+.phone .visit {
+  -webkit-transform: scale(.9);
+  transform: scale(.9);
+  right: 33px;
+  bottom: 73px
+}
+
+.black {
+  color: #000;
+  border: 1px solid #000;
+}
+
+.black:after {
+  background: #000
+}
+
+.project {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  margin-bottom: 200px;
+}
+
+.project video {
+  -webkit-transition: opacity .2s;
+  transition: opacity .2s
+}
+
+.desktop .hoverInfos {
+  left: -40px
+}
+
+.hoverInfos {
+  display: none;
+  pointer-events: none;
+  position: absolute;
+  text-rendering: geometricPrecision;
+  cursor: default;
+  pointer-events: none;
+  width: 100%;
+  top: 0;
+  height: 100%;
+  z-index: 50;
+  font-weight: 0;
+  font-style: initial;
+}
+
+.hoverInfos.light {
+  color: #000
+}
+
+.hoverInfos h1 {
+  font-family: MaisonDemiDemi;
+  text-rendering: geometricPrecision;
+  z-index: 50;
+  font-size: 66px
+}
+
+.hoverInfos h2 {
+  font-family: MaisonDemiDemi;
+  text-rendering: geometricPrecision;
+  z-index: 50;
+  margin-top: 5px;
+  margin-left: 3px;
+  font-size: 32px
+}
+
+.hoverInfos .description {
+  text-rendering: geometricPrecision;
+  font-family: MaisonBook;
+  top: 69px;
+  font-size: 18px;
+  color: #1a1a1a;
+  z-index: 50;
+  padding: 5px 0;
+  top: 68px;
+  left: -29px;
+  text-transform: uppercase;
+  margin-left: 4px;
+  line-height: 22px;
+}
+
+.hoverInfos .description span {
+  color: #696969;
+  margin: 5px 0;
+  display: inline-block
+}
+
+.hoverInfos .status {
+  text-rendering: geometricPrecision;
+  font-size: 18px;
+  color: #1a1a1a;
+  z-index: 50;
+  padding: 5px 0;
+  bottom: 63px;
+  text-transform: uppercase;
+  position: absolute;
+  text-align: left;
+  font-weight: 0;
+  font-style: initial
+}
+
+.hoverInfos .prices {
+  font-family: MaisonDemiDemi;
+  text-rendering: geometricPrecision;
+  font-size: 13px;
+  color: #1a1a1a;
+  z-index: 50;
+  bottom: 63px;
+  margin-top: 32px;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: 0;
+  font-style: initial
+}
+
+.hoverInfos .bar {
+  height: 1px;
+  width: 84px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+  margin-top: 10%;
+  background-color: #000;
+  -webkit-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0)
+}
+
+.hoverInfos .number {
+  letter-spacing: 1px;
+  font-size: 9px;
+  left: 23px;
+  bottom: 39%;
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg)
+}
+
+.hoverInfos .button-container {
+  top: 215px;
+  position: absolute;
+  z-index: 50;
+  left: -32px
+}
+
+.hoverInfos .button {
+  pointer-events: all;
+  padding: 4px 25px;
+  text-align: center;
+  height: 30px;
+  margin: auto;
+  border-radius: 30px;
+  border: 1px solid #d8d8d7;
+  cursor: pointer;
+  display: inline-block;
+  font-family: MaisonBook;
+  color: #1a1a1a;
+  font-size: 10px;
+  line-height: 31px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer
+}
+
+@media only screen and (max-width: 320px) {
+  .phone .hoverInfos .description {
+      font-size:13px;
+      line-height: 18px
+  }
+
+  .phone .hoverInfos h1 {
+      font-size: 45px
+  }
+
+  .phone .hoverInfos h2 {
+      font-size: 25px
+  }
+
+  .phone .hoverInfos .btn {
+      -webkit-transform: scale(.8);
+      transform: scale(.8);
+      -webkit-transform-origin: 0% 50%;
+      transform-origin: 0% 50%;
+      margin-top: 12px
+  }
+
+  .phone .hoverInfos .prices {
+      font-size: 11px
+  }
+}
+
+.btn {
+  border: #1a1a1a 1px solid;
+  overflow: hidden;
+  position: relative;
+  pointer-events: all;
+}
+
+.btn span {
+  z-index: 20
+}
+
+.btn:after {
+  background: #000;
+  content: "";
+  height: 155px;
+  left: -75px;
+  opacity: .2;
+  position: absolute;
+  top: -50px;
+  -webkit-transform: rotate(35deg);
+  transform: rotate(35deg);
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1);
+  width: 50px;
+  z-index: -10
+}
+
+.btn {
+  pointer-events: auto;
+  color: #1a1a1a;
+  cursor: pointer;
+  display: block;
+  font-size: 16px;
+  font-weight: 0;
+  line-height: 45px;
+  padding: 3px 5px;
+  margin-top: 30px;
+  white-space: no-break;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  width: 200px;
+  box-sizing: border-box;
+  font-family: MaisonDemiDemi;
+  text-align: center;
+}
+
+.btn:hover {
+  text-decoration: none
+}
+
+.btn:hover:after {
+  left: 120%;
+  -webkit-transition: all 550ms cubic-bezier(.19,1,.22,1);
+  transition: all 550ms cubic-bezier(.19,1,.22,1)
+}
+
+.portrait .hoverInfos {
+  -webkit-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+  margin-top: 0;
+  -webkit-transform: translateX(-30px) scale(.8);
+  transform: translateX(-30px) scale(.8);
+}
+
+.portrait .hoverInfos h2 {
+  font-size: 20px
+}
+
+.portrait .hoverInfos .prices {
+  left: 0;
+  text-align: left
+}
+
+.phone.portrait .prices {
+  bottom: 29px !important
+}
+
+.phone.landscape {
+  display: none
+}
+
+.phone .hoverInfos h1 {
+  font-size: 48px;
+  margin-bottom: 20px
+}
+
+@media only screen and (max-width: 320px) {
+  .prices {
+      display:none
+  }
+}
+
+.landscape .hoverInfos {
+  margin-top: 0;
+  -webkit-transform-origin: 0% 0%;
+  transform-origin: 0% 0%;
+  -webkit-transform: scale(.6);
+  transform: scale(.6)
+}
+
+.all-animated {
+  opacity: 0
+}
