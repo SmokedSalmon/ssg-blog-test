@@ -1,3 +1,29 @@
+## NextJS SSG Simple Tutorial
+> Using Page Router
+- create project and install
+- Page structure, including entry file `_app.js`, custom document tags `_document.js`, the index page `index.tsx`, and `404.tsx`/`500.tsx`/`_error.tsx` for error handling pages  
+  use `<Head>` component from 'next/head' to inject head tags instead of declare them in `_document.js` ([Why?](https://nextjs.org/docs/messages/no-document-title))
+- Configure
+  -  complier options including `module alias` and `baseUrl`  
+    baseUrl: relative base module imports are reference to  
+    module alias: use short alias to avoid prefix of long relative path
+- Pre-process CSS  
+  Define module level CSS for Components
+  import global CSS at entry file `_app.tsx`
+- Basic Routing with `<Link>` and `useRouter`  
+  create the `/about` Page
+  create the Navigation `<Nav>` component and apply it to all existing pages
+- Try the `<Image>` component as one of many optimized web components that NextJS provides out-of-the-box
+- Switch to **SSG** mode  
+  Learn about **CSG/SSR/SSG** render approach
+  Utilize `getStaticPaths` & `getStaticProps` to tell NextJS to **pre-render** pages dedicated by an external source  
+  create the static `/member/[id]` pages by an external data source in the dummy data folder
+  run `build` and verify those desired static pages are generated in `.next` folder
+
+The Project README begins here ⬇
+
+------
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
