@@ -37421,7 +37421,8 @@
     219: [function(t, e, i) {
         e.exports = {
             content: [{
-                url: "akira.html",
+                // url: "akira.html",
+                url: "akira",
                 classname: "light",
                 title: "Project Akira",
                 subtitle: "Metaverse Builder / 腾讯 IEG ",
@@ -37439,7 +37440,8 @@
                 video: "hsbcnet-ai.mp4"
             },
             {
-                url: "lunar.html",
+                // url: "lunar.html",
+                url: "lunar",
                 classname: "light",
                 title: "嫦娥计划 </br> 虚拟交互场景",
                 subtitle: "WebGL + MiniApp w/ 上海天文馆",
@@ -37448,7 +37450,8 @@
                 video: "lunar.mp4",
             },
             {
-                url: "tornado.html",
+                // url: "tornado.html",
+                url: "tornado",
                 classname: "light",
                 title: "Taikoo Li 3D Visual Facade",
                 subtitle: "太古里户外大屏裸眼3D动画",
@@ -37457,7 +37460,8 @@
                 video: "tkl-screen.mp4"
             },
             {
-                url: "404.html",
+                // url: "expired.html",
+                url: "expired",
                 classname: "light",
                 title: "毒App </br>Sneakers Metaverse",
                 subtitle: "NFT-drop / Punk® by DeWu Design studio",
@@ -37475,7 +37479,8 @@
                 video: "dubai2020-china.mp4",
             },
             {
-                url: "earlier-projects.html",
+                // url: "earlier-projects.html",
+                url: "earlier-projects",
                 classname: "light",
                 title: "More earlier projects </br> 早期项目",
                 subtitle: "Uploading to Metaverse 正在上传到元宇宙",
@@ -39471,7 +39476,7 @@
                 value: function() {
                     var t = this;
                     return new Promise(function(e, i) {
-                        t.addSource("mp4", "./assets/video/" + h.video).then(function() {
+                        t.addSource("mp4", "./public/video/" + h.video).then(function() {
                             e()
                         })
                     }
@@ -39579,6 +39584,8 @@
             }, {
                 key: "activate",
                 value: function() {
+                    console.log(this.video)
+                    console.log('Autoplay')
                     this.video.play(),
                     "desktop" != u.device && this.onHover()
                 }
