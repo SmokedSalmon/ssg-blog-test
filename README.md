@@ -19,6 +19,17 @@
   Utilize `getStaticPaths` & `getStaticProps` to tell NextJS to **pre-render** pages dedicated by an external source  
   create the static `/member/[id]` pages by an external data source in the dummy data folder
   run `build` and verify those desired static pages are generated in `.next` folder  
+- SSG Preview mode  
+  to be provided
+- Serving Static assets
+  > For those script-loaded static assets such as css, small images, NextJS automatically put them under `.next/static` folder
+  
+  Non script-loaded assets, which usually reside in `public/` folder, are served via:
+  - **API router** defined under `src/pages/api` with **handlers**. In this example, `express.static()'` is employed to construct the handler
+  - **NextJS' Middleware** to *rewrite*(NOT redirect) neater path to the API router above. (e.g. `xxx/public/xxx` -> `xxx/api/public/xxx`)
+  - [Optional] Copy `public/` under `.next/` as most host platforms removes project source and deploy `.next/` folder only  
+  > It is recommended to use **3rd-storage** as most host platforms also filter assets in deploy folder (such as **Vercel**). In such case this won't work. It is suggested here solely for tutorial purpose.
+  
 
 Courtesy of [看了就会的Next.js SSR/SSG实战教程](https://juejin.cn/post/7133395475675217933)  
 >The Project README begins here ⬇

@@ -10,14 +10,25 @@ function Home() {
         <h1 className={homeStyle.normal}>This is the / page</h1>
         <Image
           src={localSampleImage}
-          alt=""
+          alt="shiba wearing optical"
         />
+        <p>(Build time script-loaded image)</p>
+        <br />
         <Image
           src="https://openai-labs-public-images-prod.azureedge.net/user-7vwqopdr3gB4BqG9PgWM2uWs/generations/generation-GZkwFngNELilCVshSh4u69ZD/image.webp"
-          alt=""
+          alt="shiba at work"
           width={500}
           height={500}
         />
+        <p>(Remote Image)</p>
+        <br />
+        <Image
+          src="/public/shiba.jpg"
+          alt="shiba"
+          width={500}
+          height={500}
+        />
+        <p>(Runtime local asset image)</p>
       </>
   )
 }
