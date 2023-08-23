@@ -1,3 +1,7 @@
+/**
+ * [...slug] is the catch-all routes to contain parameters of uncertain count
+ */
+
 import fs from 'fs'
 import { resolve as pathResolve, normalize as pathNormalize } from 'path'
 import express from 'express'

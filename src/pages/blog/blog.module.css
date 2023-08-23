@@ -1,0 +1,258 @@
+/* body {
+    font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #111;
+    background-color: #fbfbfb;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+    -o-font-feature-settings: "kern" 1;
+    font-feature-settings: "kern" 1;
+    font-kerning: normal;
+    padding: 30px;
+} */
+
+@media only screen and (max-width: 600px) {
+    /* body {
+        padding: 5px;
+    } */
+    /* body>#content {
+        padding: 0px 20px 20px 20px !important;
+    } */
+}
+
+/* body>#content { */
+.container {
+    margin: 0px;
+    max-width: 900px;
+    /* border: 1px solid #e1e4e8; */
+    padding: 32px;
+    /* border-radius: 2px; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gfm-summary {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.gfm-hr {
+    color: #bbb;
+    background-color: #bbb;
+    height: 1px;
+    flex: 0 1 auto;
+    margin: 1em 0;
+    padding: 0;
+    border: none;
+}
+
+.hljs-operator {
+    color: #868686;
+    /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
+}
+
+
+/**
+ * Links
+ */
+
+.gfm-a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.gfm-a:visited {
+    color: #0366d6;
+}
+
+.gfm-a:hover {
+    color: #0366d6;
+    text-decoration: underline;
+}
+
+.gfm-pre {
+    background-color: #f6f8fa;
+    border-radius: 3px;
+    font-size: 85%;
+    line-height: 1.45;
+    overflow: auto;
+    padding: 16px;
+}
+
+
+/**
+  * Code blocks
+  */
+
+.gfm-code {
+    background-color: rgba(27, 31, 35, .05);
+    border-radius: 3px;
+    font-size: 85%;
+    margin: 0;
+    word-wrap: break-word;
+    padding: .2em .4em;
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+}
+
+.gfm-pre>code {
+    background-color: transparent;
+    border: 0;
+    display: inline;
+    line-height: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 0;
+    word-wrap: normal;
+    font-size: 100%;
+}
+
+
+/**
+ * Blockquotes
+ */
+
+.gfm-blockquote {
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    border-left-width: 3px;
+    padding: 0 1em;
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    font-size: 18px;
+    letter-spacing: -1px;
+    font-style: italic;
+}
+
+.gfm-blockquote * {
+    font-style: normal !important;
+    letter-spacing: 0;
+    color: #6a737d !important;
+}
+
+
+/**
+ * Tables
+ */
+
+.gfm-table {
+    border-spacing: 2px;
+    display: block;
+    font-size: 14px;
+    overflow: auto;
+    width: 100%;
+    margin-bottom: 16px;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.gfm-td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+.gfm-th {
+    font-weight: 600;
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+}
+
+.gfm-tr {
+    background-color: #fff;
+    border-top: 1px solid #c6cbd1;
+}
+
+.gfm-table tr:nth-child(2n) {
+    background-color: #f6f8fa;
+}
+
+
+/**
+ * Others
+ */
+
+.gfm-img {
+    max-width: 100%;
+}
+
+.gfm-p {
+    line-height: 24px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #24292e;
+}
+
+.gfm-ul {
+    margin-top: 0;
+}
+
+.gfm-ul.contains-task-list {
+    list-style-type: none;
+}
+
+.gfm-li {
+    color: #24292e;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.gfm-li+li {
+    margin-top: 0.25em;
+}
+
+/* * { */
+.gfm {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    color: #24292e;
+}
+
+.gfm-a:visited {
+    color: #0366d6;
+}
+
+.gfm-h1 {
+    font-size: 2rem;
+    margin: 0;
+    margin-bottom: 16px;
+}
+.gfm-h1,
+.gfm-h2,
+.gfm-h3 {
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid #eaecef;
+    color: #111;
+    /* Darker */
+}
+
+.gfm-code>* {
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+}
+
+.gfm-h1 .header-anchor,
+.gfm-h2 .header-anchor,
+.gfm-h3 .header-anchor,
+.gfm-h4 .header-anchor,
+.gfm-h5 .header-anchor,
+.gfm-h6 .header-anchor {
+    position: absolute;
+    margin-inline-start: -20px;
+    padding-inline-end: 4px; /* hack to continue the hover even it is out of parent's hover area */
+    text-decoration: none;
+    visibility: hidden;
+}
+
+.gfm-h1:hover .header-anchor,
+.gfm-h2:hover .header-anchor,
+.gfm-h3:hover .header-anchor,
+.gfm-h4:hover .header-anchor,
+.gfm-h5:hover .header-anchor,
+.gfm-h6:hover .header-anchor {
+    visibility: visible;
+}
+
+.gfm-ul-toc li{
+    margin-top: 0;
+    line-height: 1.3rem;
+}
