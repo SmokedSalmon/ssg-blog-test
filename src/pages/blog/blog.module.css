@@ -1,3 +1,12 @@
+@font-face {
+    font-family: "Univers 49 Light Ultra Condensed";
+    src: url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.eot");
+    src: url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.woff2")format("woff2"),
+    url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.woff")format("woff"),
+    url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.ttf")format("truetype"),
+    url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.svg#Univers 49 Light Ultra Condensed")format("svg");
+}
+
 /* body {
     font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #111;
@@ -22,13 +31,26 @@
 
 /* body>#content { */
 .container {
-    margin: 0px;
-    max-width: 900px;
+    /* margin: 0px; */
+    /* max-width: 900px; */
     /* border: 1px solid #e1e4e8; */
-    padding: 32px;
+    /* padding: 32px; */
     /* border-radius: 2px; */
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    max-width: 980px;
+    margin-inline: auto;
+    /* Font size base */
+    font-size: 16px;
+    color: #eaecef;
+    background-color: #24292e;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: lighter;
+}
+.gfm {
+    /* Inherit from the Markdown container, prevent default styles */
+    font-family: inherit;
+    font-weight: inherit;
 }
 
 .gfm-summary {
@@ -51,18 +73,50 @@
     /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
 }
 
+/**
+ * Emphasis
+ * Tags such as <strong>, <em>, <code> in fenced code (see: https://github.com/markdown-it/markdown-it/blob/master/lib/renderer.js#L81-L83)
+ * have NO token attribute attached
+ * this is a work-around so far
+ */
+.gfm strong {
+    color: greenyellow;
+}
+.gfm em {
+    color: violet;
+}
+/* Inline code */
+.gfm code {
+    background-color: rgb(60, 60, 60);
+    padding: .2em .4em;
+    border-radius: 5px;
+}
+/* Code block fence */
+.container pre {
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    /* line-height: 1.45; */
+    /* color: var(--fgColor-default, var(--color-fg-default)); */
+    /* background-color: var(--bgColor-muted, var(--color-canvas-subtle)); */
+    background-color: rgb(60, 60, 60);
+    border-radius: 6px;
+}
+.container pre>code {
+    padding: 0;
+}
 
 /**
  * Links
  */
 
 .gfm-a {
-    color: #0366d6;
+    color: skyblue;
     text-decoration: none;
 }
 
 .gfm-a:visited {
-    color: #0366d6;
+    color: palevioletred;
 }
 
 .gfm-a:hover {
@@ -90,7 +144,7 @@
     font-size: 85%;
     margin: 0;
     word-wrap: break-word;
-    padding: .2em .4em;
+    /* padding: .2em .4em; */
     font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
 }
 
@@ -122,11 +176,11 @@
     padding-left: 15px;
     font-size: 18px;
     letter-spacing: -1px;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 .gfm-blockquote * {
-    font-style: normal !important;
+    /* font-style: normal !important; */
     letter-spacing: 0;
     color: #6a737d !important;
 }
@@ -178,9 +232,8 @@
 
 .gfm-p {
     line-height: 24px;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 16px;
-    color: #24292e;
 }
 
 .gfm-ul {
@@ -192,9 +245,8 @@
 }
 
 .gfm-li {
-    color: #24292e;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: normal;
     line-height: 1.5;
 }
 
@@ -202,32 +254,67 @@
     margin-top: 0.25em;
 }
 
-/* * { */
-.gfm {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    color: #24292e;
-}
-
 .gfm-a:visited {
     color: #0366d6;
 }
 
 .gfm-h1 {
-    font-size: 2rem;
-    margin: 0;
-    margin-bottom: 16px;
+    font-size: 5em;
+    margin-top: 0;
+    padding: 1em 0 0 0;
+    padding-bottom: 16px;
+    color: white;
+}
+.gfm-h2 {
+    font-size: 3em;
+    font-weight: 300;
+    margin: 1em 0 0 0;
+    padding-bottom: 16px;
+}
+.gfm-h3 {
+    font-size: 2.5em;
+    margin: 1em 0 0 0;
+    font-weight: 300;
+    padding-bottom: 10px;
+}
+.gfm-h4 {
+    font-size: 2em;
+    margin: 1em 0 0 0;
+    font-weight: 300;
+    padding-bottom: 10px;
+}
+.gfm-h5 {
+    font-size: 1.5em;
+    margin: 1em 0 0 0;
+    font-weight: 300;
+    padding-bottom: 10px;
+}
+.gfm-h6 {
+    font-size: 1em;
+    margin: 1em 0 0 0;
+    font-weight: 300;
+    padding-bottom: 10px;
 }
 .gfm-h1,
 .gfm-h2,
 .gfm-h3 {
-    padding-bottom: 0.3rem;
+    padding-bottom: 0.3em;
     border-bottom: 1px solid #eaecef;
-    color: #111;
     /* Darker */
 }
 
 .gfm-code>* {
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
+}
+
+.gfm-h1,
+.gfm-h2,
+.gfm-h3,
+.gfm-h4,
+.gfm-h5,
+.gfm-h6 {
+    font-family: 'Univers 49 Light Ultra Condensed', Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    position: relative;
 }
 
 .gfm-h1 .header-anchor,
@@ -241,6 +328,10 @@
     padding-inline-end: 4px; /* hack to continue the hover even it is out of parent's hover area */
     text-decoration: none;
     visibility: hidden;
+    color: white;
+    height: 1em;
+    display: flex;
+    align-items: center;
 }
 
 .gfm-h1:hover .header-anchor,
@@ -254,5 +345,5 @@
 
 .gfm-ul-toc li{
     margin-top: 0;
-    line-height: 1.3rem;
+    line-height: 1.3em;
 }

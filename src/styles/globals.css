@@ -16,6 +16,46 @@
   }
 }
 
+/* fonts */
+@font-face {
+  font-family: "Calibri";
+  font-weight: normal;
+  src: url("../../public/fonts/Calibri/Calibri.eot");
+  src: url("../../public/fonts/Calibri/Calibri.woff2")format("woff2"),
+  url("../../public/fonts/Calibri/Calibri.woff")format("woff"),
+  url("../../public/fonts/Calibri/Calibri.ttf")format("truetype"),
+  url("../../public/fonts/Calibri/Calibri.svg#Calibri")format("svg");
+}
+
+@font-face {
+  font-family: "Calibri";
+  font-weight: lighter;
+  src: url("../../public/fonts/Calibri-Light/Calibri-Light.eot");
+  src: url("../../public/fonts/Calibri-Light/Calibri-Light.woff2")format("woff2"),
+  url("../../public/fonts/Calibri-Light/Calibri-Light.woff")format("woff"),
+  url("../../public/fonts/Calibri-Light/Calibri-Light.ttf")format("truetype"),
+  url("../../public/fonts/Calibri-Light/Calibri-Light.svg#Calibri Light")format("svg");
+}
+
+@font-face {
+  font-family: "Calibri";
+  font-weight: bold;
+  src: url("../../public/fonts/Calibri-Bold/Calibri-Bold.eot");
+  src: url("../../public/fonts/Calibri-Bold/Calibri-Bold.woff2")format("woff2"),
+  url("../../public/fonts/Calibri-Bold/Calibri-Bold.woff")format("woff"),
+  url("../../public/fonts/Calibri-Bold/Calibri-Bold.ttf")format("truetype"),
+  url("../../public/fonts/Calibri-Bold/Calibri-Bold.svg#Calibri Bold")format("svg");
+}
+
+/* Variable fonts - single font file that store various design appearances  */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 1000;
+  font-stretch: 0% 200%;
+  src: url("../../public/fonts/Inter-VariableFont_slnt,wght.ttf")format("truetype");
+}
+
 body {
   /* color: rgb(var(--foreground-rgb)); */
   /* background: linear-gradient(
@@ -29,4 +69,22 @@ body {
   /* padding: 20px 20px 60px; */
   /* max-width: 680px; */
   /* margin: 0 auto; */
+  
+  /* Return layout control to pages */
+  margin: 0;
+  padding: 0;
+}
+
+/* Body style for GFM Blog page */
+body.blog {
+  /* font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  /* color: #111; */
+  background-color: #24292e;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  padding: 30px;
 }

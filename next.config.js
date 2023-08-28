@@ -5,9 +5,16 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
+      // {
+      //   protocol: 'https',
+      //   hostname: 'openai-labs-public-images-prod.azureedge.net',
+      //   port: '',
+      // },
+    ],
+    remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'openai-labs-public-images-prod.azureedge.net',
+        hostname: 'file.jerrysu.net',
         port: '',
       },
     ],

@@ -11,6 +11,7 @@ import { readFile } from 'fs/promises'
 // DOMPurify on node (server side has no DOM tree to sanitize, this library will construct one to apply DOMPurify at server side)
 import { sanitize } from 'isomorphic-dompurify'
 import markdown from './markdown'
+ 
 import style from './blog.module.css'
 
 export const getStaticPaths: GetStaticPaths = () => {
@@ -25,14 +26,19 @@ export const getStaticPaths: GetStaticPaths = () => {
     }
 }
 
-export const getStaticProps: GetStaticProps<{ content: string }> = async ({ params }) => {
+/*
+ * Build time passing
+ * markdown file as content
+ * className for <body>, setting its correspondent styles on upper elements
+*/
+export const getStaticProps: GetStaticProps<{ bodyClass?: string, content: string }> = async ({ params }) => {
     // redirect to 404 page if no such page on the CMS/data source
     if (!params || !params.name) {
         return { notFound: true }
     }
     // at build time, process.cwd() is the project root
     const rawMarkdown = await readFile(resolePath(process.cwd(), `./dummyData/CMS/${params.name}.md`), 'utf-8')
-    return { props: { content: rawMarkdown } }
+    return { props: { bodyClass: 'blog', content: rawMarkdown } }
 }
 
 export default function Blog({ content }: InferGetStaticPropsType<typeof getStaticProps>) {
@@ -41,7 +47,7 @@ export default function Blog({ content }: InferGetStaticPropsType<typeof getStat
     return (
         // sanitize it with library such as DOMPurify to prevent XSS injection
         <div className={style.container}>
-            <article dangerouslySetInnerHTML={{ __html: sanitize(rawHtml) }}/>
+            <article dangerouslySetInnerHTML={{ __html: sanitize(rawHtml) }} />
         </div>
     )
 }

@@ -51,7 +51,7 @@ Some Ranged tower can attack air, some CANNOT.
 Categories include:  
 - Camera-man  
 All-around towers, affordable. `Weapon is the iconic rubber plunger? (maybe leave it to the Heroic unit??)`  
-**Melee:** attack with plunger, features animation of flushing enemy as final attack. Can be upgraded to a muscular unit. Attack one enemy at a time, with change to destroy enemy's ear-muff and sunglass.
+**Melee:** attack with plunger, features animation of flushing enemy as final attack. Can be upgraded to a muscular unit. Attack one enemy at a time, with change to destroy enemy's ear-muff and sunglass  
 **Ranged:** normal damage with high frequency. Attacks ground/air
 
 - Speaker-man  
