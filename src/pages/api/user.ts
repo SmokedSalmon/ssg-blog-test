@@ -3,7 +3,7 @@
  * Self-made of basic Authentication
  */
 import type { NextApiRequest, NextApiResponse, GetStaticProps } from 'next'
-import { BasicAES128Encoder } from '@/lib/coder'
+import { Base64Encoder } from '@/lib/coder'
 import users from 'dummyData/users.json'
 
 type RoleTypes = 'admin' | 'member' | 'guest'
@@ -41,7 +41,7 @@ const getUser = (name: string = ''): (UserRecordType | undefined) => {
     if (!name) return
     if (PlainUserNameWhiteList.includes(name)) return users.find(record => record.name === name) as UserRecordType
     try {
-        return users.find(record => record.name === BasicAES128Encoder.decode(name)) as UserRecordType
+        return users.find(record => record.name === Base64Encoder.decode(name)) as UserRecordType
     } catch (error) {
         return
     }
