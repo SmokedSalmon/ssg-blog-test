@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 412.41">
+  <defs>
+    <clipPath id="a">
+      <rect width="1600" height="519" style="fill: none"/>
+    </clipPath>
+    <linearGradient id="b" data-name="未命名的渐变 80" x1="-461" y1="120.12" x2="2091" y2="120.12" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#72c8d5"/>
+    </linearGradient>
+    <linearGradient id="c" data-name="未命名的渐变 73" x1="-193.07" y1="187" x2="2010.06" y2="187" gradientTransform="matrix(-0.96, 0, 0, 1, 1646.66, 0)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.16" stop-color="#fffcfc" stop-opacity="0.01"/>
+      <stop offset="0.3" stop-color="#fef3f3" stop-opacity="0.06"/>
+      <stop offset="0.42" stop-color="#fce3e3" stop-opacity="0.13"/>
+      <stop offset="0.54" stop-color="#f9cccc" stop-opacity="0.24"/>
+      <stop offset="0.66" stop-color="#f6b0b0" stop-opacity="0.38"/>
+      <stop offset="0.77" stop-color="#f28c8c" stop-opacity="0.55"/>
+      <stop offset="0.88" stop-color="#ed6262" stop-opacity="0.75"/>
+      <stop offset="0.99" stop-color="#e83333" stop-opacity="0.97"/>
+      <stop offset="1" stop-color="#e72d2d"/>
+    </linearGradient>
+  </defs>
+  <title>gfm-blog-bg</title>
+  <g style="clip-path: url(#a)">
+    <polyline points="-461 -4.2 2091 333.23 2061 -93" style="opacity: 0.5;fill: url(#b)"/>
+    <polyline points="1832 20.17 -283 473 -258.14 -99" style="opacity: 0.5;fill: url(#c)"/>
+  </g>
+</svg>

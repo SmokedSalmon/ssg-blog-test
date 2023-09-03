@@ -5,6 +5,8 @@ export type StaticPageType = {
 
 export type StaticPagePropType = {
     bodyClass?: string,
+    title: string,
+    abstract: string,
     content: string,
     restricted: boolean,
     locale: string,

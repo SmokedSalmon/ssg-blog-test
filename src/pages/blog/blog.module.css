@@ -7,6 +7,9 @@
     url("../../../public/fonts/Univers-49-Light-Ultra-Condensed/Univers-49-Light-Ultra-Condensed.svg#Univers 49 Light Ultra Condensed")format("svg");
 }
 
+/* @value codeFont: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; */
+@value --codeFont: Liberation Mono, Menlo, Courier, monospace;
+
 /* body {
     font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #111;
@@ -40,13 +43,15 @@
     /* margin-right: auto; */
     max-width: 980px;
     margin-inline: auto;
-    /* Font size base */
+    /* Font size base for all child elements */
     font-size: 16px;
     color: #eaecef;
-    background-color: #24292e;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: lighter;
+    padding: 3em;
+    
 }
+
 .gfm {
     /* Inherit from the Markdown container, prevent default styles */
     font-family: inherit;
@@ -82,30 +87,66 @@
  * this is a work-around so far
  */
 .gfm strong {
-    color: greenyellow;
+    /* color: greenyellow; */
+    color: limegreen;
 }
 .gfm em {
     color: violet;
 }
+
 /* Inline code */
 .gfm code {
+    font-family: --codeFont;
+    font-size: 85%;
+    color: #FFCC33;
     background-color: rgb(60, 60, 60);
     padding: .2em .4em;
     border-radius: 5px;
 }
-/* Code block fence */
+
+/** 
+ * Code block, fenced and normal
+ * not sure why isn't the <pre> container comes with a class .gfm-pre???
+ */
 .container pre {
-    padding: 16px;
+    padding: 1em;
     overflow: auto;
-    font-size: 85%;
-    /* line-height: 1.45; */
+    line-height: 1.45;
     /* color: var(--fgColor-default, var(--color-fg-default)); */
     /* background-color: var(--bgColor-muted, var(--color-canvas-subtle)); */
     background-color: rgb(60, 60, 60);
     border-radius: 6px;
+    word-wrap: break-word;
+    /* padding: .2em .4em; */
+    font-family: --codeFont;
 }
 .container pre>code {
     padding: 0;
+    color: inherit;
+}
+
+
+/**
+ * Blockquote
+ */
+.gfm-blockquote {
+    margin-left: 30px;
+    margin-top: 0px;
+    margin-bottom: 16px;
+    border-left-width: 3px;
+    padding: 0 1em;
+    color: #828282;
+    border-left: 4px solid #e8e8e8;
+    padding-left: 15px;
+    /* font-size: 1.125em; */
+    letter-spacing: -1px;
+    /* font-style: italic; */
+}
+
+.gfm-blockquote * {
+    /* font-style: normal !important; */
+    letter-spacing: 0;
+    /* color: #6a737d !important; */
 }
 
 /**
@@ -113,16 +154,16 @@
  */
 
 .gfm-a {
-    color: skyblue;
+    color: #00FFFF;
     text-decoration: none;
 }
 
 .gfm-a:visited {
-    color: palevioletred;
+    color: #DD4477;
 }
 
 .gfm-a:hover {
-    color: #0366d6;
+    filter: brightness(75%);
     text-decoration: underline;
 }
 
@@ -135,59 +176,6 @@
     padding: 16px;
 }
 
-
-/**
-  * Code blocks
-  */
-
-.gfm-code {
-    background-color: rgba(27, 31, 35, .05);
-    border-radius: 3px;
-    font-size: 85%;
-    margin: 0;
-    word-wrap: break-word;
-    /* padding: .2em .4em; */
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
-}
-
-.gfm-pre>code {
-    background-color: transparent;
-    border: 0;
-    display: inline;
-    line-height: inherit;
-    margin: 0;
-    overflow: visible;
-    padding: 0;
-    word-wrap: normal;
-    font-size: 100%;
-}
-
-
-/**
- * Blockquotes
- */
-
-.gfm-blockquote {
-    margin-left: 30px;
-    margin-top: 0px;
-    margin-bottom: 16px;
-    border-left-width: 3px;
-    padding: 0 1em;
-    color: #828282;
-    border-left: 4px solid #e8e8e8;
-    padding-left: 15px;
-    font-size: 18px;
-    letter-spacing: -1px;
-    /* font-style: italic; */
-}
-
-.gfm-blockquote * {
-    /* font-style: normal !important; */
-    letter-spacing: 0;
-    color: #6a737d !important;
-}
-
-
 /**
  * Tables
  */
@@ -195,7 +183,7 @@
 .gfm-table {
     border-spacing: 2px;
     display: block;
-    font-size: 14px;
+    font-size: .875em;
     overflow: auto;
     width: 100%;
     margin-bottom: 16px;
@@ -235,7 +223,7 @@
 .gfm-p {
     line-height: 24px;
     font-weight: 300;
-    font-size: 16px;
+    font-size: 1em;
 }
 
 .gfm-ul {
@@ -247,7 +235,7 @@
 }
 
 .gfm-li {
-    font-size: 16px;
+    font-size: 1em;
     font-weight: normal;
     line-height: 1.5;
 }
@@ -256,12 +244,8 @@
     margin-top: 0.25em;
 }
 
-.gfm-a:visited {
-    color: #0366d6;
-}
-
 .gfm-h1 {
-    font-size: 5em;
+    font-size: 10.8em;
     margin-top: 0;
     padding: 1em 0 0 0;
     padding-bottom: 16px;
@@ -270,14 +254,39 @@
 .gfm-h2 {
     font-size: 3em;
     font-weight: 300;
+    color: #00FFFF;
     margin: 1em 0 0 0;
     padding-bottom: 16px;
 }
+.gfm-h2::before {
+    content: '';
+    position: absolute;
+    bottom: 0.15em;
+    right: 0;
+    display: block;
+    width: 98%;
+    height: 0.5em;
+    background: url("../../../public/gfm-blog-h2-bg-1.svg") repeat;
+    background-size: 18px 18px;
+    z-index: -1;
+}
 .gfm-h3 {
     font-size: 2.5em;
-    margin: 1em 0 0 0;
     font-weight: 300;
+    color: #FF6699;
+    margin: 1em 0 0 0;
     padding-bottom: 10px;
+}
+.gfm-h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0.15em;
+    right: 0;
+    display: block;
+    width: 98%;
+    height: 0.4em;
+    background: url("../../../public/gfm-blog-h2-bg-2.svg") repeat;
+    background-size: 6px 6px;
 }
 .gfm-h4 {
     font-size: 2em;
@@ -301,12 +310,8 @@
 .gfm-h2,
 .gfm-h3 {
     padding-bottom: 0.3em;
-    border-bottom: 1px solid #eaecef;
+    /* border-bottom: 1px solid #eaecef; */
     /* Darker */
-}
-
-.gfm-code>* {
-    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace !important;
 }
 
 .gfm-h1,
@@ -350,9 +355,26 @@
     line-height: 1.3em;
 }
 
+/* Header */
+.gfm-header {
+    position: relative;
+    margin-bottom: 2em;
+    display: flex;
+    flex-wrap: wrap;
+}
+.gfm-header .gfm-title {
+    flex: 1 0 90%;
+}
+.gfm-header .gfm-h1 {
+    border: 0;
+    margin: 0;
+    padding-bottom: 0;
+}
 /* Language Switcher */
 .lang-dropdown {
-    display: inline-block;
+    flex: 1 0 5em;
+    align-self: flex-end;
+    position: relative;
 }
 
 .lang-dropdown-toggle {
@@ -361,6 +383,7 @@
     border-radius: 3px;
     padding: 0.2em 0.5em;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .lang-dropdown-toggle :global(.down-arrow) {
@@ -384,6 +407,8 @@
 }
 
 .lang-dropdown-menu {
+    position: absolute;
+    width: 100%;
     background-color: #24292e;
     border: 1px solid #eaecef;
     border-radius: 3px;
@@ -405,3 +430,62 @@
 .lang-dropdown-item:hover, .lang-dropdown-item:global(.active) {
     filter: brightness(115%);
 }
+
+/* abstract blockquote */
+.gfm-abstract {
+    margin-top: 2rem;
+    flex: 1 0 100%;
+}
+.gfm-abstract .gfm-blockquote {
+    background: url("../../../public/gfm-blog-abstract-bg.svg") repeat;
+    background-size: 1.25em 1.25em;
+    margin: 0 -2em!important;
+    padding: 0.1em 2em!important;
+    border: 0!important;
+}
+.gfm-abstract .gfm-blockquote p {
+    padding-inline: 2em;
+    border-left: .4em solid #bbb;
+}
+
+/*
+ *
+ * MarkdownIt not adding class to children like it does automatically to their parents that are top layer elements
+ */
+.gfm em>* {
+    color: inherit;
+}
+
+.container *::selection {
+    background-color: teal;
+}
+
+/*
+ * === Responsive-related ===
+ * Not applying any framework such as bootstrap nor tailwind. Will adapt later
+ */
+
+ @media (max-width: 768px) {
+    .container {
+        font-size: 14px;
+        padding: 2em;
+    } 
+    .gfm-image {
+        max-width: 80vw;
+    }
+    .gfm-h1 {
+        font-size: 6.8em;
+    }
+    .gfm-blockquote {
+
+    }
+    .gfm-table {
+
+    }
+    .gfm-p {
+        line-height: 1.3em;
+    }
+    .gfm-li {
+        
+    }
+ }

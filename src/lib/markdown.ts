@@ -93,9 +93,12 @@ function imageLink(state) {
                         continue
                     }
                 const image = token.children[j]
+                // style
+                image.attrPush(['class', style['gfm-image']])
+                // wrap an open link with target="_blank" to align with Github's behavior
                 const linkOpen = new state.Token('link_open', 'a', 1) 
                 linkOpen.attrPush(['href', image.attrGet('src')])
-                linkOpen.attrPush(['target', '_blank'])
+                linkOpen.attrPush(['target', '_blank']) // make sure the sanitizer you use in the downstream allows 'target' attribute
                 linkOpen.attrPush(['rel', 'noopener noreferrer nofollow'])
                 const linkClose = new state.Token('link_close', 'a', -1) 
                 token.children.splice(j, 1, linkOpen, image, linkClose) 
@@ -107,3 +110,32 @@ function imageLink(state) {
 markdown.core.ruler.before('linkify', 'image_Link', imageLink) 
 
 export default markdown
+
+export function extractAndRemoveTopH1IfExist(rawMarkdown: string) {
+    try {
+        const match = /^[ \t]*#[ ]+.*$/gm.exec(rawMarkdown)
+        if (match) {
+            const { 0: title, index: start } = match
+            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + title.length))
+            return { title, trimmed }
+        }
+    } catch (err) {
+        console.warn('Error occur during extracting 1st H1 as page title from markdown content')
+    }
+    return { title: '', trimmed: rawMarkdown }
+}
+
+export function extractAndRemoveAbstractIfExist(rawMarkdown: string) {
+    try {
+        // must comes after only empty lines or white-spaces, then maximum 3 ' ' before '>', then include everything until we hit an empty line(2 consecutive line-break)
+        const match = /^(?:\s*)(?<! {4})>.+?\r?\n(\r?\n|$)/gs.exec(rawMarkdown)
+        if (match) {
+            const { 0: abstract, index: start } = match
+            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + abstract.length))
+            return { abstract, trimmed }
+        }
+    } catch (err) {
+        console.warn('Error occur during extracting 1st blockquote as abstract from markdown content')
+    }
+    return { abstract: '', trimmed: rawMarkdown }
+}

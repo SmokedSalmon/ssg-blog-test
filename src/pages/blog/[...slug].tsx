@@ -11,10 +11,11 @@ import { resolve as resolvePath } from 'path'
 import { readFile } from 'fs/promises'
 // DOMPurify on node (server side has no DOM tree to sanitize, this library will construct one to apply DOMPurify at server side)
 import { useState, useEffect, useCallback, useMemo } from 'react';
+import { ReactDOM } from 'react';
 import { useRouter } from 'next/router';
 import { setConfig as DOMPurifySetConfig, sanitize } from 'isomorphic-dompurify'
 import Dropdown from '@/components/Dropdown'
-import markdown from '../../lib/markdown'
+import markdown, { extractAndRemoveTopH1IfExist, extractAndRemoveAbstractIfExist } from '../../lib/markdown'
  
 import style from './blog.module.css'
 
@@ -78,11 +79,18 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     // at build time, process.cwd() is the project root
     // Since nextJS already ensures locale can default, while I allow article to put outside any locale folder, we must check both
     const slug = params.slug as string[]
-    let content: string
+    let title = ''
+    let abstract = ''
+    let content = ''
     try {
         const fileRelativePath = localeSetting ? [locale, ...slug].join('/') : slug.join('/')
         const rawMarkdown = await readFile(resolvePath(process.cwd(), `./dummyData/CMS/${fileRelativePath}.md`), 'utf-8')
-        content =  markdown.render(rawMarkdown)
+        // content =  markdown.render(rawMarkdown)
+        const { title: rawTitle, trimmed: rawContent } = extractAndRemoveTopH1IfExist(rawMarkdown)
+        const { abstract: rawAbstract, trimmed: rawContentWithoutAbstract } = extractAndRemoveAbstractIfExist(rawContent)
+        title = markdown.render(rawTitle || `# ${name}`) // default title to page name
+        abstract = markdown.render(rawAbstract)
+        content = markdown.render(rawContentWithoutAbstract)
     } catch (err) {
         content = 'Something wrong when parsing Markdown format'
     }
@@ -90,6 +98,8 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     return {
         props: {
             bodyClass: `blog ${locale}`,
+            title,
+            abstract,
             content,
             restricted,
             locale,
@@ -98,7 +108,9 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     }
 }
 
-export default function Blog({ content, restricted, locale, localeSetting }: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Blog(
+    { title, abstract, content, restricted, locale, localeSetting }: InferGetStaticPropsType<typeof getStaticProps>
+) {
     const router = useRouter()
     const [userStatus, setUserStatus] = useState({ name: '', role: '', error: null, isLoading: true })
     useEffect(() => {
@@ -151,24 +163,29 @@ export default function Blog({ content, restricted, locale, localeSetting }: Inf
     return (
         // sanitize it with library such as DOMPurify to prevent XSS injection
         <div className={style.container}>
-            {Array.isArray(localeSetting) && localeSetting.length > 1
-                ? <Dropdown
-                    toggleId="lang-menu-toggle"
-                    toggleText="lang"
-                    items={[
-                        { text: 'English', shortText: 'EN', action: () => changeLocale('en') },
-                        { text: '中文', shortText: '中', action: () => changeLocale('zh') },
-                    ]}
-                    selected={locale === 'en' ? 0 : 1}
-                    classes={{
-                        wrapper: `${style['lang-dropdown']} ${style.gfm}`,
-                        toggle: `${style['lang-dropdown-toggle']} ${style.gfm}`,
-                        menu: `${style['lang-dropdown-menu']} ${style.gfm}`,
-                        item: `${style['lang-dropdown-item']} ${style.gfm}`,
-                    }}
-                />
-                : null
-            }
+            <header className={style['gfm-header']}>
+                <div className={style['gfm-title']} dangerouslySetInnerHTML={{ __html: sanitize(title) }} />
+                {Array.isArray(localeSetting) && localeSetting.length > 1
+                    ? <Dropdown
+                        toggleId="lang-menu-toggle"
+                        toggleText="lang"
+                        items={[
+                            { text: 'English', shortText: 'EN', action: () => changeLocale('en') },
+                            { text: '中文', shortText: '中', action: () => changeLocale('zh') },
+                        ]}
+                        selected={locale === 'en' ? 0 : 1}
+                        classes={{
+                            wrapper: `${style['lang-dropdown']} ${style.gfm}`,
+                            toggle: `${style['lang-dropdown-toggle']} ${style.gfm}`,
+                            menu: `${style['lang-dropdown-menu']} ${style.gfm}`,
+                            item: `${style['lang-dropdown-item']} ${style.gfm}`,
+                        }}
+                    />
+                    : null
+                }
+                <div className={style['gfm-abstract']} dangerouslySetInnerHTML={{ __html: sanitize(abstract) }} />
+                
+            </header>
             <article dangerouslySetInnerHTML={{ __html: sanitize(content) }} />
         </div>
     )

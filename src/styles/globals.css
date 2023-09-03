@@ -87,5 +87,21 @@ body.blog {
   -o-font-feature-settings: "kern" 1;
   font-feature-settings: "kern" 1;
   font-kerning: normal;
-  padding: 30px;
+
+  background: url("../../public/gfm-blog-bg.svg") no-repeat #24292e;
+
+  background-size: 150vw auto;
+  background-position-x: center;
+}
+
+@media (max-width: 768px) {
+  body.blog {
+    background-size: 200vw auto;
+  }
+}
+
+@media (max-width: 480px) {
+  body.blog {
+    background-size: 250vw auto;
+  }
 }

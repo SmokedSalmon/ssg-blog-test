@@ -5,6 +5,7 @@
 
 `Some inline code`
 
+Fenced code block  
 ```
 code line-1
 code line-2
@@ -16,6 +17,8 @@ console.log('JavaScript code blocks fence')
 console.log('2nd line')
 ```
 
-    console.log('JavaScript code blocks')
+code block
+
+    console.log('JavaScript code blocks') // and this is a very long line of code so you should NOT see any word wrap
     console.log('2nd line')
 
