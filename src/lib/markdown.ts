@@ -6,9 +6,8 @@ import HighLightJS from 'highlight.js'
 import MarkDownItTaskLists from 'markdown-it-task-lists'
 import MarkDownItAnchor from 'markdown-it-anchor'
 import MarkDownTOC from 'markdown-it-toc-done-right'
-// @ts-ignore
 
-import style from './blog.module.css'
+import style from '@/pages/blog/blog.module.css'
 
 const markdown = new MarkdownIt({
     // change plain link to link
@@ -17,10 +16,10 @@ const markdown = new MarkdownIt({
     highlight: (str: string, lang: string) => {
         if (lang && HighLightJS.getLanguage(lang)) {
             try {
-                return HighLightJS.highlight(str, { language: lang }).value;
+                return HighLightJS.highlight(str, { language: lang }).value 
             } catch (__) { }
         }
-        return '';
+        return '' 
     }
 })
     .use(MarkDownItTaskLists)
@@ -76,14 +75,14 @@ markdown.core.ruler.push('gfmClass', state => {
 function imageLink(state) {
     // do not process first and last token
     for (let i = 1, l = state.tokens.length; i < (l - 1); ++i) {
-        const token = state.tokens[i];
+        const token = state.tokens[i] 
         // <img> is inline element
         if (token.type !== 'inline') {
-            continue;
+            continue 
         }
         // top-most one-layer tag
         if (token.children.length === 1 && token.children[0].type !== 'image') {
-            continue;
+            continue 
         }
         // nested image tags
         for (let j = 0; j < token.children.length; j ++) {
@@ -94,15 +93,17 @@ function imageLink(state) {
                         continue
                     }
                 const image = token.children[j]
-                const linkOpen = new state.Token('link_open', 'a', 1);
-                linkOpen.attrPush(['href', image.attrGet('src')]);
-                const linkClose = new state.Token('link_close', 'a', -1);
-                token.children.splice(j, 1, linkOpen, image, linkClose);
+                const linkOpen = new state.Token('link_open', 'a', 1) 
+                linkOpen.attrPush(['href', image.attrGet('src')])
+                linkOpen.attrPush(['target', '_blank'])
+                linkOpen.attrPush(['rel', 'noopener noreferrer nofollow'])
+                const linkClose = new state.Token('link_close', 'a', -1) 
+                token.children.splice(j, 1, linkOpen, image, linkClose) 
                 j += 2
             }
         }
     }
 }
-markdown.core.ruler.before('linkify', 'image_Link', imageLink);
+markdown.core.ruler.before('linkify', 'image_Link', imageLink) 
 
 export default markdown

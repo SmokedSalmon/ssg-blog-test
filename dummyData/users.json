@@ -1,0 +1,22 @@
+[
+    {
+        "name": "jerry",
+        "role": "admin"
+    },
+    {
+        "name": "smokedsalmon",
+        "role": "admin"
+    },
+    {
+        "name": "gainaxc2",
+        "role": "admin"
+    },
+    {
+        "name": "allan",
+        "role": "guest"
+    },
+    {
+        "name": "joshua",
+        "role": "member"
+    }
+]
