@@ -9,6 +9,7 @@
 
 /* @value codeFont: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace; */
 @value --codeFont: Liberation Mono, Menlo, Courier, monospace;
+@value --primaryColor: #eaecef;
 
 /* body {
     font: 400 16px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -45,7 +46,7 @@
     margin-inline: auto;
     /* Font size base for all child elements */
     font-size: 16px;
-    color: #eaecef;
+    color: --primaryColor;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-weight: lighter;
     padding: 3em;
@@ -78,6 +79,16 @@
 .hljs-operator {
     color: #868686;
     /* There is a bug where the syntax highlighter would pick no color for e.g. `&&` symbols in the code samples. Let's overwrite this */
+}
+
+/**
+ * Table of Content
+ */
+ .container :global(.table-of-contents) .gfm-li {
+    margin-bottom: .5em;
+ }
+ .container :global(.table-of-contents) .gfm-li > ul {
+    font-size: 90%;
 }
 
 /**
@@ -153,16 +164,16 @@
  * Links
  */
 
-.gfm-a {
+.gfm-a, .container a {
     color: #00FFFF;
     text-decoration: none;
 }
 
-.gfm-a:visited {
+.gfm-a:visited, .container a:visited {
     color: #DD4477;
 }
 
-.gfm-a:hover {
+.gfm-a:hover, .container a:hover {
     filter: brightness(75%);
     text-decoration: underline;
 }
@@ -277,7 +288,7 @@
     margin: 1em 0 0 0;
     padding-bottom: 10px;
 }
-.gfm-h3::after {
+.gfm-h3::before {
     content: '';
     position: absolute;
     bottom: 0.15em;
@@ -310,7 +321,7 @@
 .gfm-h2,
 .gfm-h3 {
     padding-bottom: 0.3em;
-    /* border-bottom: 1px solid #eaecef; */
+    /* border-bottom: 1px solid --primaryColor; */
     /* Darker */
 }
 
@@ -339,6 +350,9 @@
     height: 1em;
     display: flex;
     align-items: center;
+}
+.gfm-a.header-anchor:visited {
+    color: inherit;
 }
 
 .gfm-h1:hover .header-anchor,
@@ -379,7 +393,7 @@
 
 .lang-dropdown-toggle {
     background-color: #24292e;
-    border: 1px solid #eaecef;
+    border: 1px solid --primaryColor;
     border-radius: 3px;
     padding: 0.2em 0.5em;
     display: flex;
@@ -403,14 +417,14 @@
 .lang-dropdown-toggle :global(.separate) {
     height: 0.8em;
     margin-inline: .5em;
-    border-left:1px solid #eaecef;
+    border-left:1px solid --primaryColor;
 }
 
 .lang-dropdown-menu {
     position: absolute;
     width: 100%;
     background-color: #24292e;
-    border: 1px solid #eaecef;
+    border: 1px solid --primaryColor;
     border-radius: 3px;
     visibility: hidden;
 }
@@ -459,6 +473,26 @@
 .container *::selection {
     background-color: teal;
 }
+.container article > * {
+    transition: transform cubic-bezier(0, 0, 0.17, 1.01) .2s;
+}
+.container article > *:hover {
+    transform: scale(1);
+}
+.container article > *:hover::after {
+    content: '';
+    pointer-events: none;
+    /* border-left: 2px solid rgba(255, 255, 255, 0.1); */
+    position: absolute;
+    /* height: 100%;
+    margin-inline-start: -2em; */
+    top: -1em;
+    right: -1em;
+    bottom: -1em;
+    left: -1em;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+}
 
 /*
  * === Responsive-related ===
@@ -484,6 +518,9 @@
     }
     .gfm-p {
         line-height: 1.3em;
+    }
+    .gfm-ul {
+        padding-inline-start: 1em;
     }
     .gfm-li {
         
