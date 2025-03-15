@@ -113,29 +113,38 @@ export default markdown
 
 export function extractAndRemoveTopH1IfExist(rawMarkdown: string) {
     try {
-        const match = /^[ \t]*#[ ]+.*$/gm.exec(rawMarkdown)
+        const match = /^[ \t]*#[ ]+(.*)$/gm.exec(rawMarkdown)
         if (match) {
-            const { 0: title, index: start } = match
-            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + title.length))
-            return { title, trimmed }
+            const { 0: titleLine, 1: title, index: start } = match
+            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + titleLine.length))
+            return { titleLine, title: title.trim(), trimmed }
         }
     } catch (err) {
         console.warn('Error occur during extracting 1st H1 as page title from markdown content')
     }
-    return { title: '', trimmed: rawMarkdown }
+    return { titleLine: '', title: '', trimmed: rawMarkdown }
 }
 
 export function extractAndRemoveAbstractIfExist(rawMarkdown: string) {
+    const abstractTexts = []
     try {
         // must comes after only empty lines or white-spaces, then maximum 3 ' ' before '>', then include everything until we hit an empty line(2 consecutive line-break)
-        const match = /^(?:\s*)(?<! {4})>.+?\r?\n(\r?\n|$)/gs.exec(rawMarkdown)
-        if (match) {
-            const { 0: abstract, index: start } = match
-            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + abstract.length))
-            return { abstract, trimmed }
+        const matchAsWhole = /^(?:\s*)(?<![\f\v ]{4})>.+?\r?\n(\r?\n|$)/gs.exec(rawMarkdown)
+        if (matchAsWhole) {
+            const { 0: abstractWhole, index: start } = matchAsWhole
+            const trimmed = rawMarkdown.slice(0, start).concat(rawMarkdown.slice(start + abstractWhole.length))
+            const matchLines = abstractWhole.matchAll(/^[\f\v ]*>\s?(.+?)$/gm)
+            let mi = matchLines.next()
+            while (!mi.done) {
+                abstractTexts.push(mi.value[1])
+                mi = matchLines.next()
+            }
+            const abstract = abstractTexts.join('\\n').trim()
+            return { abstractToRender: abstractWhole, abstract, trimmed }
         }
+
     } catch (err) {
         console.warn('Error occur during extracting 1st blockquote as abstract from markdown content')
     }
-    return { abstract: '', trimmed: rawMarkdown }
+    return { abstractToRender: '', abstract: '', trimmed: rawMarkdown }
 }

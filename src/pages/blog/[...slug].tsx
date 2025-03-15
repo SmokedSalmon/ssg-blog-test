@@ -30,6 +30,7 @@ const StaticPages: { [name: string]: StaticPageType } = {
         // certain user role is required to view the content }
         restricted: true,
     },
+    ['wx-test-1']: {},
 }
 
 // tell DOMPurify to allow 'target' attribute for <a> target
@@ -82,14 +83,18 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     let title = ''
     let abstract = ''
     let content = ''
+    let metaTitle = ''
+    let metaDesc = ''
     try {
         const fileRelativePath = localeSetting ? [locale, ...slug].join('/') : slug.join('/')
         const rawMarkdown = await readFile(resolvePath(process.cwd(), `./dummyData/CMS/${fileRelativePath}.md`), 'utf-8')
         // content =  markdown.render(rawMarkdown)
-        const { title: rawTitle, trimmed: rawContent } = extractAndRemoveTopH1IfExist(rawMarkdown)
-        const { abstract: rawAbstract, trimmed: rawContentWithoutAbstract } = extractAndRemoveAbstractIfExist(rawContent)
-        title = markdown.render(rawTitle || `# ${name}`) // default title to page name
-        abstract = markdown.render(rawAbstract)
+        const { titleLine, title: titleText, trimmed: rawContent } = extractAndRemoveTopH1IfExist(rawMarkdown)
+        const { abstractToRender, abstract: abstractText, trimmed: rawContentWithoutAbstract } = extractAndRemoveAbstractIfExist(rawContent)
+        metaTitle = titleText
+        title = markdown.render(titleLine || `# ${name}`) // default title to page name
+        metaDesc = abstractText
+        abstract = markdown.render(abstractToRender)
         content = markdown.render(rawContentWithoutAbstract)
     } catch (err) {
         content = 'Something wrong when parsing Markdown format'
@@ -104,6 +109,10 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
             restricted,
             locale,
             localeSetting: localeSetting || null,
+            // test for wx-share-test
+            metaTitle,
+            metaDesc,
+            metaImage: 'https://img.yimutian.com/sells/62238a3fb827730a8851da0b03200320-256-256C.jpeg',
         }
     }
 }

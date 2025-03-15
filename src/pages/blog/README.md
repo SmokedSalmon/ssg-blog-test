@@ -25,4 +25,4 @@ I first used *markdown-to-jsx* but switch to this library as I found this one of
 ## About `markdown-it`
 task list, Anchor/Permalink and TOC is implemented with plugins  
 Syntax highlight is implemented using `highlight.js` via markdown-it's own API  
-Detail please see [./markdown.ts](./markdown.ts)
+Detail please see [src/lib/markdown.ts](../../lib/markdown.ts)
