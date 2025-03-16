@@ -8,6 +8,7 @@ import MarkDownItAnchor from 'markdown-it-anchor'
 import MarkDownTOC from 'markdown-it-toc-done-right'
 
 import style from '@/pages/blog/blog.module.css'
+import { MarkdownMetaType } from '@/pages/blog/types'
 
 const markdown = new MarkdownIt({
     // change plain link to link
@@ -111,6 +112,38 @@ markdown.core.ruler.before('linkify', 'image_Link', imageLink)
 
 export default markdown
 
+export function extractMarkdownMetadataIfExist(rawMarkdown: string): MarkdownMetaType {
+    try {
+        const matchSectionMark = rawMarkdown.matchAll(/^[-=]+[\f\v ]*$/gm)
+        let metaStart = 0
+        let rawMetadata = ''
+        let i = 0
+        for (; i < 100; i ++) {
+            const next = matchSectionMark.next()
+            if (next.done || next.value.index === undefined) {
+                if (metaStart === 0) return {}
+                rawMetadata = rawMarkdown.slice(metaStart)
+                break
+            }
+            metaStart = next.value.index + next.value[0].length
+        }
+        if (i >= 100 )throw ('Too many sections wrap by "---", stop extracting metadata')
+
+        const matchTitle = /(?<=^\s+meta-title:).*$/gim.exec(rawMetadata)
+        const title = matchTitle && matchTitle[0].trim() || undefined
+        const matchAbstract = /(?<=^\s+(Abstract|Summary|meta-desc|meta-description):).*$/gim.exec(rawMetadata)
+        const abstract = matchAbstract && matchAbstract[0].trim() || undefined
+        const matchThumbnail = /(?<=^\s+(Thumbnail|Image|meta-image|meta-thumbnail):).*$/gim.exec(rawMetadata)
+        const thumbnail = matchThumbnail && matchThumbnail[0].trim() || undefined
+        // TODO Tags
+        return { title, abstract, thumbnail }
+    } catch (err) {
+        console.warn('Error occur during extracting metadata from markdown content')
+        console.warn(err)
+        return {}
+    }
+}
+
 export function extractAndRemoveTopH1IfExist(rawMarkdown: string) {
     try {
         const match = /^[ \t]*#[ ]+(.*)$/gm.exec(rawMarkdown)
@@ -121,6 +154,7 @@ export function extractAndRemoveTopH1IfExist(rawMarkdown: string) {
         }
     } catch (err) {
         console.warn('Error occur during extracting 1st H1 as page title from markdown content')
+        console.warn(err)
     }
     return { titleLine: '', title: '', trimmed: rawMarkdown }
 }
@@ -145,6 +179,20 @@ export function extractAndRemoveAbstractIfExist(rawMarkdown: string) {
 
     } catch (err) {
         console.warn('Error occur during extracting 1st blockquote as abstract from markdown content')
+        console.warn(err)
     }
     return { abstractToRender: '', abstract: '', trimmed: rawMarkdown }
+}
+
+export function extract1stImageIfExist(rawMarkdown: string) {
+    try {
+        const matched = /\!\[[^\[\]]*\]\(([^\(\)]+)\)/gm.exec(rawMarkdown)
+        if (matched) {
+            return { imageLine: matched[0], url: matched[1] }
+        }
+    } catch (err) {
+        console.warn('Error occur during extracting 1st image from markdown content')
+        console.warn(err)
+    }
+    return { imageLine: '', url: '' }
 }

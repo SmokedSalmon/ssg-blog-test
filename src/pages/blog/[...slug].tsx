@@ -15,23 +15,10 @@ import { ReactDOM } from 'react';
 import { useRouter } from 'next/router';
 import { setConfig as DOMPurifySetConfig, sanitize } from 'isomorphic-dompurify'
 import Dropdown from '@/components/Dropdown'
-import markdown, { extractAndRemoveTopH1IfExist, extractAndRemoveAbstractIfExist } from '../../lib/markdown'
+import markdown, { extractMarkdownMetadataIfExist, extractAndRemoveTopH1IfExist, extractAndRemoveAbstractIfExist, extract1stImageIfExist } from '../../lib/markdown'
+import StaticPages from 'dummyData/CMS/blogs';
  
 import style from './blog.module.css'
-
-// hard-code the pages and rely on the files as data source for this simple website
-const StaticPages: { [name: string]: StaticPageType } = {
-    ['test-project-1']: {},
-    ['test-project-2']: {
-        locale: 'zh'
-    },
-    ['project-ocr-001']: {
-        locale: ['en', 'zh'],
-        // certain user role is required to view the content }
-        restricted: true,
-    },
-    ['wx-test-1']: {},
-}
 
 // tell DOMPurify to allow 'target' attribute for <a> target
 DOMPurifySetConfig({ ADD_ATTR: ['target'] })
@@ -83,17 +70,26 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     let title = ''
     let abstract = ''
     let content = ''
-    let metaTitle = ''
-    let metaDesc = ''
+    let metaTitle
+    let metaDesc
+    let metaImage
     try {
         const fileRelativePath = localeSetting ? [locale, ...slug].join('/') : slug.join('/')
         const rawMarkdown = await readFile(resolvePath(process.cwd(), `./dummyData/CMS/${fileRelativePath}.md`), 'utf-8')
         // content =  markdown.render(rawMarkdown)
+        const metaData = extractMarkdownMetadataIfExist(rawMarkdown)
+        console.log(metaData)
         const { titleLine, title: titleText, trimmed: rawContent } = extractAndRemoveTopH1IfExist(rawMarkdown)
+        metaTitle = metaData.title || titleText
+        metaDesc = metaData.abstract
         const { abstractToRender, abstract: abstractText, trimmed: rawContentWithoutAbstract } = extractAndRemoveAbstractIfExist(rawContent)
-        metaTitle = titleText
+        if (!metaDesc) metaDesc = abstractText
+        metaImage = metaData.thumbnail
+        if (!metaImage) {
+            const { url: imageUrl } = extract1stImageIfExist(rawContent)
+            metaImage = imageUrl
+        }
         title = markdown.render(titleLine || `# ${name}`) // default title to page name
-        metaDesc = abstractText
         abstract = markdown.render(abstractToRender)
         content = markdown.render(rawContentWithoutAbstract)
     } catch (err) {
@@ -103,16 +99,15 @@ export const getStaticProps: GetStaticProps<StaticPagePropType> = async ({ param
     return {
         props: {
             bodyClass: `blog ${locale}`,
+            metaTitle,
+            metaDesc,
+            metaImage,
             title,
             abstract,
             content,
             restricted,
             locale,
             localeSetting: localeSetting || null,
-            // test for wx-share-test
-            metaTitle,
-            metaDesc,
-            metaImage: 'https://img.yimutian.com/sells/62238a3fb827730a8851da0b03200320-256-256C.jpeg',
         }
     }
 }
